@@ -12,7 +12,7 @@ my_list.pop(1)
 
 my_dict_add = {'key1': 'value1', 'key2': 'value2', 'key3': 'value3', 'key4': 'value4', 'key5': 'value5'}
 # print(my_dict_add)
-my_dict_add['i am a tuple'] = 'value6'
+my_dict_add[('i am a tuple',)] = 'value6'
 del my_dict_add['key5']
 # print(my_dict_add)
 
