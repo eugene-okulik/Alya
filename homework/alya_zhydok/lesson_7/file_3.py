@@ -20,6 +20,8 @@ d_1 = int(result_4[c:])
 
 def calc(numb):
     print(numb + 10)
+
+    
 calc(a_1)
 calc(b_1)
 calc(c_1)
