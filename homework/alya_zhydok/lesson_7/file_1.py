@@ -1,5 +1,3 @@
-
-
 while  True:
     a = '3'
     user_input = input('Enter a number')
