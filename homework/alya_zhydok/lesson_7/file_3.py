@@ -27,4 +27,3 @@ calc(a_1)
 calc(b_1)
 calc(c_1)
 calc(d_1)
-
