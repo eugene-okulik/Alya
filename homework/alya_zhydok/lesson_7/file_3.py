@@ -18,6 +18,7 @@ c_1 = int(result_3[c:])
 d = result_4.index(': ') + 2
 d_1 = int(result_4[c:])
 
+
 def calc(numb):
     print(numb + 10)
 
@@ -26,3 +27,4 @@ calc(a_1)
 calc(b_1)
 calc(c_1)
 calc(d_1)
+
