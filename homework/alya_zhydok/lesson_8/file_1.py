@@ -8,5 +8,4 @@ if bonus is True:
     salary_result = salary + number
 else:
     salary_result = salary
-
 print(f"{salary}, {bonus} - '${salary_result}'")
