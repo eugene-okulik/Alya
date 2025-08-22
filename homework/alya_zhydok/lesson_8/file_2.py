@@ -13,7 +13,7 @@ for n in range(195):
 for n in range(800):
     number_1000 = next(fib_gen)
 for n in range(99000):
-    number_100000 = next(fib_gen)    
+    number_100000 = next(fib_gen)
 print(f'5 число {number_5}')
 print(f'200 число {number_200}')
 print(f'1000 число {number_1000}')
