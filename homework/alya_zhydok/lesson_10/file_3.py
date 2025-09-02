@@ -11,6 +11,7 @@ def operation_manager(func):
 
     return wrapper
 
+
 @operation_manager
 def calc(first, second, operation):
     if operation == '+':
@@ -26,6 +27,7 @@ def calc(first, second, operation):
     else:
         return "Некорректная операция"
 
+
 def main():
     try:
         num1 = float(input("Введите первое число: "))
@@ -36,6 +38,7 @@ def main():
 
     result = calc(num1, num2, None)
     print(f"Результат: {result}")
+
 
 if __name__ == "__main__":
     main()
