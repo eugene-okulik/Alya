@@ -1,6 +1,4 @@
 def finish_me(func):
-
-
     def wrapper():
         func()
         print('finished')
