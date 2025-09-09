@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Optional
 
+
 # Общий класс для всех цветов
 @dataclass
 class Flower:
@@ -12,7 +13,11 @@ class Flower:
     lifespan: int     # среднее время жизни в днях
 
     def __str__(self):
-        return f"{self.name} ({self.color}), стебель: {self.length_stem}см, свежесть: {self.freshness}, цена: {self.price}₽, срок жизни: {self.lifespan} дн"
+        return (
+    f"{self.name} ({self.color}), стебель: {self.length_stem}см, "
+    f"свежесть: {self.freshness}, цена: {self.price}₽, "
+    f"срок жизни: {self.lifespan} дн"
+)
 
 
 # Подклассы для конкретных видов цветов
