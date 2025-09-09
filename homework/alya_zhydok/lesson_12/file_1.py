@@ -17,7 +17,7 @@ class Flower:
             f"{self.name} ({self.color}), стебель: {self.length_stem}см, "
             f"свежесть: {self.freshness}, цена: {self.price}₽, "
             f"срок жизни: {self.lifespan} дн"
-)
+        )
 
 
 # Подклассы для конкретных видов цветов
