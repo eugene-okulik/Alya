@@ -39,21 +39,17 @@ class Bouquet:
     def add_flower(self, flower: Flower):
         self.flowers.append(flower)
 
-
     def total_cost(self) -> float:
         return sum(flower.price for flower in self.flowers)
-
 
     def average_lifespan(self) -> float:
         if not self.flowers:
             return 0
         return sum(flower.lifespan for flower in self.flowers) / len(self.flowers)
 
-
     def days_until_wilt(self) -> float:
         """Определяет среднее время увядания цветов в букете"""
         return self.average_lifespan()
-
 
     def sort_by(self, parameter: str):
         """Сортирует цветы по указанному параметру"""
@@ -85,7 +81,6 @@ class Bouquet:
             return []
 
         return [flower for flower in self.flowers if key_func(flower) == value]
-
 
     def __str__(self):
         return '\n'.join(str(flower) for flower in self.flowers)
