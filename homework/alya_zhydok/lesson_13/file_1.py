@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 base_path = os.path.dirname(__file__)
 file_path = os.path.join(base_path, 'data.txt')
 homework_path = os.path.dirname(os.path.dirname(base_path))
-#print(homework_path)
+# print(homework_path)
 eugene_file_path = os.path.join(homework_path, 'eugene_okulik', 'hw_13', 'data.txt')
 print(eugene_file_path)
 
