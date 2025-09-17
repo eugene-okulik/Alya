@@ -1,4 +1,4 @@
-insert into students (name, second_name, group_id) values ('Alya', 'Zhydok', 2)
+insert into students (name, second_name) values ('Alya', 'Zhydok')
 
 insert into books (title, taken_by_student_id) values ('september', 21304)
 
