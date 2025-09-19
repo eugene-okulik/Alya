@@ -1,0 +1,36 @@
+insert into students (name, second_name) values ('Alya', 'Zhydok')
+
+insert into books (title, taken_by_student_id) values ('september', 21304)
+
+insert into books (title, taken_by_student_id) values ('october', 21304)
+
+insert into `groups` (title, start_date, end_date) values ('autumn', '01-09-2025', '31-05-2026')
+
+update students set group_id = (select id from `groups` where title = 'autumn') where name = 'Alya'
+
+insert into subjects (title) values ('autumn_1')
+
+insert into subjects (title) values ('autumn_2')
+
+insert into lessons (title, subject_id) values ('september_1', 12266)
+insert into lessons (title, subject_id) values ('october_1', 12266)
+insert into lessons (title, subject_id) values ('september_2', 12267)
+insert into lessons (title, subject_id) values ('october_2', 12267)
+
+insert into marks (value, lesson_id, student_id) values (9, 12729, 21304)
+insert into marks (value, lesson_id, student_id) values (10, 12730, 21304)
+insert into marks (value, lesson_id, student_id) values (8, 12731, 21304)
+insert into marks (value, lesson_id, student_id) values (9, 12732, 21304)
+
+select* from marks where student_id=21304
+
+select* from books where taken_by_student_id=21304
+
+select*
+from students s
+join books b on s.id=b.taken_by_student_id
+join `groups` g on s.group_id=g.id
+join marks m on s.id=m.student_id
+join lessons l on m.lesson_id=l.id
+join subjects sub on l.subject_id=sub.id
+where s.id=21304
