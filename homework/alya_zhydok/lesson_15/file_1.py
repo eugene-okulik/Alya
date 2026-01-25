@@ -21,7 +21,7 @@ query = "INSERT INTO books (title, taken_by_student_id) VALUES (%s, %s)"
 values = [
         ('my_book1', student_id),
         ('my_book2', student_id)
-    ]
+]
 cursor.executemany(query, values)
 # cursor.execute(f'SELECT * from books where taken_by_student_id = {student_id}')
 # print(cursor.fetchall())
@@ -53,7 +53,7 @@ subject2_id = cursor.lastrowid
 query1 = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
 values = [
         ('lesson1', subject1_id)
-    ]
+]
 cursor.executemany(query1, values)
 lesson1_id = cursor.lastrowid
 
