@@ -24,7 +24,7 @@ values = [
     ]
 cursor.executemany(query, values)
 # cursor.execute(f'SELECT * from books where taken_by_student_id = {student_id}')
-#print(cursor.fetchall())
+# print(cursor.fetchall())
 
 # create group
 cursor.execute("INSERT INTO `groups` (title, start_date, end_date) VALUES ('my_group1', '01-09-2025', '31-05-2026')")
