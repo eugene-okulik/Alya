@@ -88,6 +88,6 @@ join subjects sub on l.subject_id=sub.id
 where s.id= {student_id}
 ''')
 print(cursor.fetchall())
-#db.commit()
+db.commit()
 
 db.close()
