@@ -41,22 +41,29 @@ cursor.execute("UPDATE students SET group_id = %s where id = %s", (gr_id, studen
 # cursor.execute(f'SELECT * from students where id = {student_id}')
 # print(cursor.fetchall())
 # create subjects
+
+
 def create_subject(cursor, title):
     query_subject = "INSERT INTO subjects (title) VALUES (%s)"
     cursor.execute(query_subject, (title,))
     subject_id = cursor.lastrowid
     cursor.execute('SELECT * FROM subjects WHERE id = %s', (subject_id,))
     return subject_id, cursor.fetchall()
+
+
 subject1_id, result1 = create_subject(cursor, 'geography_1')
 print(result1)
 subject2_id, result2 = create_subject(cursor, 'geography_2')
 print(result2)
 # create lesson
+
+
 def create_lesson(cursor, title, subject_id):
     query = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
     cursor.execute(query, (title, subject_id))
     lesson_id = cursor.lastrowid
     return lesson_id
+
 
 lesson1_id = create_lesson(cursor, 'lesson1', subject1_id)
 lesson2_id = create_lesson(cursor, 'lesson2', subject1_id)
