@@ -9,13 +9,15 @@ db = mysql.connect(
 )
 
 cursor = db.cursor(dictionary=True)
-
 # create student
-cursor.execute("INSERT INTO students (name, second_name) VALUES ('Alya2', 'Zhydok2')")
+query_student = "INSERT INTO students (name, second_name) VALUES (%s, %s)"
+values = [
+    ('Alya2', 'Zhydok2')
+]
+cursor.executemany(query_student, values)
 student_id = cursor.lastrowid
-# cursor.execute(f'SELECT * from students where id = {student_id}')
-# print(cursor.fetchone())
-
+cursor.execute(f'SELECT * from students where id = {student_id}')
+print(cursor.fetchall())
 # create books
 query = "INSERT INTO books (title, taken_by_student_id) VALUES (%s, %s)"
 values = [
@@ -25,66 +27,41 @@ values = [
 cursor.executemany(query, values)
 # cursor.execute(f'SELECT * from books where taken_by_student_id = {student_id}')
 # print(cursor.fetchall())
-
 # create group
-cursor.execute("INSERT INTO `groups` (title, start_date, end_date) VALUES ('my_group1', '01-09-2025', '31-05-2026')")
+query_group = "INSERT INTO `groups` (title, start_date, end_date) VALUES (%s, %s, %s)"
+values = [
+    ('my_group1', '01-09-2025', '31-05-2026')
+]
+cursor.executemany(query_group, values)
 gr_id = cursor.lastrowid
-# cursor.execute(f'SELECT * from `groups` where id = {gr_id}')
-# print(cursor.fetchone())
-
+cursor.execute(f'SELECT * from `groups` where id = {gr_id}')
+print(cursor.fetchall())
 # update student
 cursor.execute("UPDATE students SET group_id = %s where id = %s", (gr_id, student_id))
 # cursor.execute(f'SELECT * from students where id = {student_id}')
 # print(cursor.fetchall())
+# create subjects
+def create_subject(cursor, title):
+    query_subject = "INSERT INTO subjects (title) VALUES (%s)"
+    cursor.execute(query_subject, (title,))
+    subject_id = cursor.lastrowid
+    cursor.execute('SELECT * FROM subjects WHERE id = %s', (subject_id,))
+    return subject_id, cursor.fetchall()
+subject1_id, result1 = create_subject(cursor, 'geography_1')
+print(result1)
+subject2_id, result2 = create_subject(cursor, 'geography_2')
+print(result2)
+# create lesson
+def create_lesson(cursor, title, subject_id):
+    query = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
+    cursor.execute(query, (title, subject_id))
+    lesson_id = cursor.lastrowid
+    return lesson_id
 
-# create subject1
-cursor.execute("INSERT INTO subjects (title) VALUES ('geography_1')")
-subject1_id = cursor.lastrowid
-# cursor.execute(f'SELECT * from subjects where id = {subject1_id}')
-# print(cursor.fetchone())
-
-# create subject2
-cursor.execute("INSERT INTO subjects (title) VALUES ('geography_2')")
-subject2_id = cursor.lastrowid
-# cursor.execute(f'SELECT * from subjects where id = {subject2_id}')
-# print(cursor.fetchone())
-
-# create lesson1
-query1 = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
-values = [
-    ('lesson1', subject1_id)
-]
-cursor.executemany(query1, values)
-lesson1_id = cursor.lastrowid
-
-# create lesson2
-query2 = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
-values = [
-    ('lesson2', subject1_id)
-]
-cursor.executemany(query2, values)
-lesson2_id = cursor.lastrowid
-# cursor.execute(f'SELECT * from lessons where subject_id = {subject1_id}')
-# print(cursor.fetchall())
-
-# create lesson3
-query3 = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
-values = [
-    ('lesson3', subject2_id)
-]
-cursor.executemany(query3, values)
-lesson3_id = cursor.lastrowid
-
-# create lesson4
-query4 = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
-values = [
-    ('lesson4', subject2_id)
-]
-cursor.executemany(query4, values)
-lesson4_id = cursor.lastrowid
-# cursor.execute(f'SELECT * from lessons where subject_id = {subject2_id}')
-# print(cursor.fetchall())
-
+lesson1_id = create_lesson(cursor, 'lesson1', subject1_id)
+lesson2_id = create_lesson(cursor, 'lesson2', subject1_id)
+lesson3_id = create_lesson(cursor, 'lesson3', subject2_id)
+lesson4_id = create_lesson(cursor, 'lesson4', subject2_id)
 # set marks
 # insert into marks (value, lesson_id, student_id) values (9, 12729, 21304)
 insert_query = "INSERT INTO marks (value, lesson_id, student_id) VALUES (%s, %s, %s)"
@@ -96,14 +73,11 @@ cursor.executemany(
         (10, lesson4_id, student_id)
     ]
 )
-
 # answer
 cursor.execute(f'SELECT * from marks where student_id = {student_id}')
 print(cursor.fetchall())
-
 cursor.execute(f'SELECT * from books where taken_by_student_id = {student_id}')
 print(cursor.fetchall())
-
 cursor.execute(f'''
 select *
 from students s
@@ -115,7 +89,6 @@ join subjects sub on l.subject_id=sub.id
 where s.id= {student_id}
 ''')
 print(cursor.fetchall())
-
 db.commit()
 
 db.close()
