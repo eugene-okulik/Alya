@@ -11,13 +11,11 @@ db = mysql.connect(
 cursor = db.cursor(dictionary=True)
 # create student
 query_student = "INSERT INTO students (name, second_name) VALUES (%s, %s)"
-values = [
-    ('Alya2', 'Zhydok2')
-]
-cursor.executemany(query_student, values)
+values = ('Alya', 'Zhydok')
+cursor.execute(query_student, values)
 student_id = cursor.lastrowid
-cursor.execute(f'SELECT * from students where id = {student_id}')
-print(cursor.fetchall())
+cursor.execute('SELECT * FROM students WHERE id = %s', (student_id,))
+print(cursor.fetchone())
 # create books
 query = "INSERT INTO books (title, taken_by_student_id) VALUES (%s, %s)"
 values = [
@@ -25,21 +23,15 @@ values = [
     ('my_book2', student_id)
 ]
 cursor.executemany(query, values)
-# cursor.execute(f'SELECT * from books where taken_by_student_id = {student_id}')
-# print(cursor.fetchall())
 # create group
 query_group = "INSERT INTO `groups` (title, start_date, end_date) VALUES (%s, %s, %s)"
-values = [
-    ('my_group1', '01-09-2025', '31-05-2026')
-]
-cursor.executemany(query_group, values)
+values = ('my_group1', '01-09-2025', '31-05-2026')
+cursor.execute(query_group, values)
 gr_id = cursor.lastrowid
-cursor.execute(f'SELECT * from `groups` where id = {gr_id}')
-print(cursor.fetchall())
+cursor.execute('SELECT * FROM `groups` WHERE id = %s', (gr_id,))
+print(cursor.fetchone())
 # update student
 cursor.execute("UPDATE students SET group_id = %s where id = %s", (gr_id, student_id))
-# cursor.execute(f'SELECT * from students where id = {student_id}')
-# print(cursor.fetchall())
 # create subjects
 
 
@@ -96,6 +88,6 @@ join subjects sub on l.subject_id=sub.id
 where s.id= {student_id}
 ''')
 print(cursor.fetchall())
-db.commit()
+#db.commit()
 
 db.close()
