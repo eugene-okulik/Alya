@@ -24,7 +24,7 @@ db = mysql.connect(
 
 # Загрузка данных из базы данных
 cursor = db.cursor()
-cursor.execute(f'''
+cursor.execute('''
 select s.name, s.second_name, g.title, b.title, sub.title, l.title, m.value
 from students s
 join `groups` g on s.group_id=g.id
