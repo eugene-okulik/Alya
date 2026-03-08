@@ -60,7 +60,7 @@ missing_in_db = [row for row in csv_rows if row not in db_set]
 
 # Выводим результат
 for name, second_name, group_title, book_title, subject_title, lesson_title, mark_value in missing_in_db:
-    print(f"{name},{second_name},{group_title},{book_title},{subject_title},{lesson_title},{mark_value}")
+    print(f"{name} {second_name} {group_title} {book_title} {subject_title} {lesson_title} {mark_value}")
 
 # закрываем соединение
 db.close()
