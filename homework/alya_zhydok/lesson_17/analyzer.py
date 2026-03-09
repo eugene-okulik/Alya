@@ -9,6 +9,7 @@ try:
 except ImportError:
     COLORAMA_AVAILABLE = False
 
+
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Анализатор логов.")
     parser.add_argument('path', help='Путь к папке с лог-файлами')
@@ -18,9 +19,11 @@ def parse_arguments():
     args = parser.parse_args()
     return args
 
+
 def is_log_file(filename):
     # Список расширений лог-файлов
     return filename.endswith('.log') or filename.endswith('.txt') or True
+
 
 def get_log_files(path):
     files = []
@@ -32,6 +35,7 @@ def get_log_files(path):
             if os.path.isfile(full_path):
                 files.append(full_path)
     return files
+
 
 def parse_log_block(lines):
     # блоки логов начинаются с даты
@@ -46,6 +50,7 @@ def parse_log_block(lines):
         timestamp = None
     content = '\n'.join(lines)
     return {'timestamp': timestamp, 'content': content}
+
 
 def read_log_file(filepath):
     blocks = []
@@ -67,22 +72,24 @@ def read_log_file(filepath):
             blocks.append(parse_log_block(current_block))
     return blocks
 
+
 def highlight_text(text, word, color=Fore.RED):
     pattern = re.compile(re.escape(word), re.IGNORECASE)
+
     def repl(match):
         if COLORAMA_AVAILABLE:
             return color + match.group(0) + Style.RESET_ALL
         else:
             return match.group(0)
     return pattern.sub(repl, text)
+
+
 def find_text_in_block(block, search_text, first_only=False, max_results=10):
     results = []
     content_lower = block['content'].lower()
     search_lower = search_text.lower()
     for match in re.finditer(re.escape(search_lower), content_lower):
-        start_idx = match.start()
         index_in_content = match.start()
-        words = block['content'].split()
         content_lower = block['content'].lower()
         match_pos = content_lower.find(search_lower, index_in_content)
         start_context = max(0, match_pos - 50)
@@ -103,6 +110,7 @@ def find_text_in_block(block, search_text, first_only=False, max_results=10):
             break
     return results
 
+
 def main():
     args = parse_arguments()
 
@@ -121,7 +129,7 @@ def main():
                 results = find_text_in_block(block, search_text, first_only=first_only, max_results=max_results)
                 for res in results:
                     total_found += 1
-                    timestamp_str = res['timestamp'].strftime('%Y-%m-%d %H:%M:%S') if res['timestamp'] else 'Нет времени'
+                    timestamp_str = res['timestamp'].strftime('%Y-%m-%d %H:%M:%S') if res['timestamp'] else 'Нет даты'
                     print(f"\nФайл: {file}")
                     print(f"Время: {timestamp_str}")
                     print("Обрыв ошибки:")
@@ -139,7 +147,6 @@ def main():
 
     if total_found == 0:
         print("Совпадений не найдено.")
-
 
 if __name__ == '__main__':
     main()
