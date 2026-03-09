@@ -40,14 +40,14 @@ def get_log_files(path):
 def parse_log_block(lines):
     # блоки логов начинаются с даты
     # Регулярное выражение для поиска времени в начале строки
+    # Регулярное выражение для поиска времени в начале строки
     timestamp_pattern = r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
     first_line = lines[0]
     match = re.match(timestamp_pattern, first_line)
     timestamp_str = match.group(0) if match else ''
-    try:
+    timestamp = None
+    if timestamp_str:
         timestamp = datetime.strptime(timestamp_str, '%Y-%m-%d %H:%M:%S')
-    except:
-        timestamp = None
     content = '\n'.join(lines)
     return {'timestamp': timestamp, 'content': content}
 
@@ -143,10 +143,9 @@ def main():
                 break
         except Exception as e:
             print(f"Ошибка при обработке файла {file}: {e}")
-
-
     if total_found == 0:
         print("Совпадений не найдено.")
+
 
 if __name__ == '__main__':
     main()
