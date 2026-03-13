@@ -75,10 +75,6 @@ def put_a_post():
     return response.json()['id']
 
 
-def clear(id):
-    requests.delete(f'http://objapi.course.qa-practice.com/object/{id}')
-
-
 def new_post():
     body = {
         "name": "new_name",
@@ -105,10 +101,6 @@ def patch_a_post():
     assert data['name'] == 'new_name1'
     assert data['data'] == {}
     return response.json()['id']
-
-
-def clear(id):
-    requests.delete(f'http://objapi.course.qa-practice.com/object/{id}')
 
 
 def new_post():
