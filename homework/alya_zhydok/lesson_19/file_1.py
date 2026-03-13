@@ -46,18 +46,6 @@ def clear(id):
     requests.delete(f'http://objapi.course.qa-practice.com/object/{id}')
 
 
-def new_post():
-    body = {
-        "name": "new_name",
-        "data": {}
-    }
-    response = requests.post(
-        'http://objapi.course.qa-practice.com/object',
-        json=body
-    )
-    return response.json()['id']
-
-
 def put_a_post():
     id = new_post()
     body = {
@@ -72,18 +60,6 @@ def put_a_post():
     data = response.json()
     assert data['name'] == 'new_name1'
     assert data['data'] == {}
-    return response.json()['id']
-
-
-def new_post():
-    body = {
-        "name": "new_name",
-        "data": {}
-    }
-    response = requests.post(
-        'http://objapi.course.qa-practice.com/object',
-        json=body
-    )
     return response.json()['id']
 
 
@@ -103,18 +79,6 @@ def patch_a_post():
     return response.json()['id']
 
 
-def new_post():
-    body = {
-        "name": "new_name",
-        "data": {}
-    }
-    response = requests.post(
-        'http://objapi.course.qa-practice.com/object',
-        json=body
-    )
-    return response.json()['id']
-
-
 def delete_a_post():
     id = new_post()
     response = requests.delete(
@@ -123,4 +87,4 @@ def delete_a_post():
     assert response.status_code == 200, 'Status code is incorrect'
 
 
-one_post()
+delete_a_post()
