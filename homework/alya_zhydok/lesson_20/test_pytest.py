@@ -39,7 +39,13 @@ def test_get_one_object(new_object_id, hello):
     print('after test')
 
 
-@pytest.mark.parametrize('body', [{"name": "new_name_1", "data": {}},{"name": "new_name_2", "data": {}}, {"name": "new_name_3", "data": {}}])
+@pytest.mark.parametrize(
+    'body', [
+        {"name": "new_name_1", "data": {}},
+        {"name": "new_name_2", "data": {}},
+        {"name": "new_name_3", "data": {}}
+    ]
+)
 def test_add_3_object(body, hello):
     print('before test')
     response = requests.post(
@@ -48,7 +54,6 @@ def test_add_3_object(body, hello):
     )
     id = response.json()['id']
     assert response.status_code == 200
-    data = response.json()
     print('deleting object')
     requests.delete(f'http://objapi.course.qa-practice.com/object/{id}')
     print('after test')
@@ -84,4 +89,3 @@ def test_patch_object(new_object_id, hello):
     assert data['name'] == 'patch_name'
     assert data['data'] == {}
     print('after test')
-    
