@@ -84,3 +84,4 @@ def test_patch_object(new_object_id, hello):
     assert data['name'] == 'patch_name'
     assert data['data'] == {}
     print('after test')
+    
