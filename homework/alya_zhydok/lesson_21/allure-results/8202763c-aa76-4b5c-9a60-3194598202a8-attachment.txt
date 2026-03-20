@@ -1,4 +1,0 @@
-5516
-before test
-after test
-deleting object
