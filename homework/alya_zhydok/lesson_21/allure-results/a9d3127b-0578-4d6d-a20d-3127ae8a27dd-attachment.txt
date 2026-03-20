@@ -1,0 +1,3 @@
+before test
+deleting object
+after test
