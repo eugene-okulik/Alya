@@ -89,3 +89,12 @@ def test_patch_object(new_object_id, hello):
     assert data['name'] == 'patch_name'
     assert data['data'] == {}
     print('after test')
+
+
+def test_delete_object(new_object_id, hello):
+    print('before test')
+    response = requests.delete(
+        f'http://objapi.course.qa-practice.com/object/{new_object_id}'
+    )
+    assert response.status_code == 200
+    print('after test')
