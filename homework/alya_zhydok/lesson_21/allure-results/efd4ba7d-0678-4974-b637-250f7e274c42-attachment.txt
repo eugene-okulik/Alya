@@ -1,0 +1,4 @@
+5597
+before test
+after test
+deleting object

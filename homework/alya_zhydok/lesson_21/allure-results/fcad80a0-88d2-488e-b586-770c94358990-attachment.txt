@@ -1,0 +1,5 @@
+5600
+before test
+after test
+deleting object
+Testing completed
